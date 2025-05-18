@@ -9,6 +9,8 @@ This package allows simple interaction with [Basecamp API](https://github.com/ba
 3. [Authentication with Refresh token](https://github.com/mare011rs/basecampapi#3-authentication-with-refresh-token)
 4. [Attachments](https://github.com/mare011rs/basecampapi#4-attachments)
 5. [Additional information](https://github.com/mare011rs/basecampapi#5-additional-information)
+6. [Command line interface](https://github.com/mare011rs/basecampapi#6-command-line-interface)
+7. [Solution architecture](https://github.com/mare011rs/basecampapi#7-solution-architecture)
 
 ## 1. Installation
 The package can be installed from your terminal by typing:
@@ -160,3 +162,37 @@ Future upgrades:
 - To-dos
 
 Request new features in [issues](https://github.com/mare011rs/basecampapi/issues).
+
+## 6. Command line interface
+
+This package now provides a Typer-powered CLI. After installation you can access
+it with the ``basecampapi`` command:
+
+```bash
+basecampapi --help
+```
+
+The CLI exposes commands for authentication, sending Campfire messages and
+creating Message Board posts. Run ``basecampapi <command> --help`` for details on
+available options.
+
+## 7. Solution architecture
+
+This project follows a modular architecture. The ``Basecamp`` class handles
+authentication and stores session state. Feature-specific endpoint classes such
+as ``Campfire``, ``MessageBoard`` and ``Attachments`` extend ``Basecamp`` to
+interact with their respective API sections. The optional command line interface
+is implemented using Typer and simply invokes these classes under the hood.
+
+```text
+┌───────────────┐      ┌─────────────────────┐
+│   Basecamp    │◀────▶│   Endpoint classes  │
+└───────────────┘      │  (Campfire, etc.)   │
+        ▲              └─────────────────────┘
+        │                   ▲
+        │                   │
+        ▼              ┌─────────┐
+     Typer CLI ───────▶│  User   │
+                       └─────────┘
+```
+
