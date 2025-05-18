@@ -173,3 +173,16 @@ Future upgrades:
 - To-dos
 
 Request new features in [issues](https://github.com/mare011rs/basecampapi/issues).
+
+## 6. Command line interface
+
+This package now provides a Typer-powered CLI. After installation you can access
+it with the ``basecampapi`` command:
+
+```bash
+basecampapi --help
+```
+
+The CLI exposes commands for authentication, sending Campfire messages and
+creating Message Board posts. Run ``basecampapi <command> --help`` for details on
+available options.
