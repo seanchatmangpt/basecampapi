@@ -15,7 +15,20 @@ The package can be installed from your terminal by typing:
 
     pip install basecampapi
 
-You need to have python 3.7 or higher installed.
+You need to have python 3.8 or higher installed.
+
+### Configuration with environment variables
+
+`BasecampConfig` can load credentials from environment variables using the
+`BASECAMP_` prefix (for example `BASECAMP_ACCOUNT_ID`). You can also define them
+in a `.env` file. Pass an instance of `BasecampConfig` to `Basecamp`:
+
+```python
+from basecampapi import Basecamp, BasecampConfig
+
+config = BasecampConfig()
+bc = Basecamp(credentials=config)
+```
 
 
 ## 2. Initial authentication: Getting your refresh token

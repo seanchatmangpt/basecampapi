@@ -1,11 +1,14 @@
 import requests
+from typing import Union
+
+from .config import BasecampConfig
 
 class Basecamp:
     
     __credentials = {}
     __base_url = ""
     
-    def __init__(self, credentials: dict, verification_code='Not available!'):
+    def __init__(self, credentials: Union[dict, BasecampConfig], verification_code='Not available!'):
         '''
         Initializes a Basecamp session.
 
@@ -14,6 +17,9 @@ class Basecamp:
             credentials (dict): A dictionary containing client_id, client_secret, redirect_uri and refresh_token.
         ''' 
         
+        if isinstance(credentials, BasecampConfig):
+            credentials = credentials.model_dump()
+
         Basecamp.__base_url = f"https://3.basecampapi.com/{credentials['account_id']}"
         Basecamp.__credentials = credentials
         
