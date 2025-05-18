@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.7"
 requests = "*"
 filetype = "^1.2.0"
+selenium = "*"
 
 
 [build-system]

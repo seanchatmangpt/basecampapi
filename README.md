@@ -9,6 +9,7 @@ This package allows simple interaction with [Basecamp API](https://github.com/ba
 3. [Authentication with Refresh token](https://github.com/mare011rs/basecampapi#3-authentication-with-refresh-token)
 4. [Attachments](https://github.com/mare011rs/basecampapi#4-attachments)
 5. [Additional information](https://github.com/mare011rs/basecampapi#5-additional-information)
+6. [Browser automation](https://github.com/mare011rs/basecampapi#6-browser-automation)
 
 ## 1. Installation
 The package can be installed from your terminal by typing:
@@ -16,6 +17,9 @@ The package can be installed from your terminal by typing:
     pip install basecampapi
 
 You need to have python 3.7 or higher installed.
+
+If you want to use the ``BrowserAuth`` helper for automated token retrieval,
+install Selenium and have a compatible WebDriver available on your ``PATH``.
 
 
 ## 2. Initial authentication: Getting your refresh token
@@ -160,3 +164,26 @@ Future upgrades:
 - To-dos
 
 Request new features in [issues](https://github.com/mare011rs/basecampapi/issues).
+
+## 6. Browser automation
+
+The `BrowserAuth` utility automates the process of obtaining both access and
+refresh tokens. It relies on Selenium and a local web driver installation.
+
+```python
+from basecampapi import BrowserAuth
+
+creds = {
+    "client_id": "your-client-id",
+    "client_secret": "your-client-secret",
+    "redirect_uri": "http://localhost"
+}
+
+auth = BrowserAuth(creds, username="your-login", password="your-password")
+tokens = auth.get_tokens()
+print(tokens["refresh_token"], tokens["access_token"])
+```
+
+Make sure `chromedriver` or another Selenium compatible driver is installed and
+available on your system's `PATH`.
+
